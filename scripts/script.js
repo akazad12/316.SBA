@@ -4,8 +4,8 @@ var menuLinks = [
   {
     text: 'Create New Study Guide', href: '/#',
   },
-  { text: 'List of Guides', href: '/guides' },
-  { text: 'Recent Scores', href: '/scores' },
+  { text: 'List of Guides', href: '/#' },
+  { text: 'Recent Scores', href: '/#' },
 
 ];
 //Getting Started
@@ -24,6 +24,9 @@ topMenuEl.classList.add('flex-around')
 menuLinks.forEach(link => {
   const a = document.createElement('a')
   a.href = link.href
+  a.onclick =function(){
+    window.confirm('Feature Coming soon')
+  }
   a.textContent = link.text
   topMenuEl.appendChild(a)
 });
