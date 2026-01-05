@@ -4,6 +4,8 @@
 :root{
     --main-bg: #1c64c9;
     --top-menu-bg: #df7d0d;
+    --correct-bg: green;
+    --wrong-bg: red;
 }
 body {
   font-family: Tahoma, Geneva, sans-serif;
