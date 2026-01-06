@@ -1,5 +1,7 @@
+// importing file with all the questions witch are a list of objects
 import { questions } from "./quiz316.3.js";
 
+//Creates the heading with values to be populated in the future
 var menuLinks = [
   {
     text: 'Create New Study Guide', href: '/#',
@@ -8,10 +10,10 @@ var menuLinks = [
   { text: 'Recent Scores', href: '/#' },
 
 ];
-//Getting Started
+//Getting Started - sets the background color from css and gives user instruction in main element
 const mainEl = document.querySelector('main');
 mainEl.style.backgroundColor = 'var(--main-bg)';
-mainEl.innerHTML = '<h1>DOM Manipulation</h1>';
+// mainEl.innerHTML = '<h1>Type your name to Begin</h1>';
 mainEl.classList.add('flex-ctr');
 
 //Creating Menubar
@@ -25,14 +27,13 @@ menuLinks.forEach(link => {
   const a = document.createElement('a')
   a.href = link.href
   a.onclick = function () {
+    //external links not working, outputs a BOM confirm message
     window.confirm('Feature Coming soon')
   }
   a.textContent = link.text
   topMenuEl.appendChild(a)
 });
 let name;
-
-
 document.getElementById("Name").addEventListener('submit', function (e) {
   e.preventDefault();
   displayQuestion(current);
@@ -70,9 +71,10 @@ function answerValidator(e) {
       if (current < qs) {
         questionElement.innerHTML = ""
         displayQuestion(current)
+        mainEl.innerHTML= ""
         mainEl.style.backgroundColor = 'var(--main-bg)';
       }
-    }, 500)
+    }, 1000)
     console.log(score, qs, current)
 
   } if (current == qs) {
@@ -87,7 +89,11 @@ function answerValidator(e) {
       mainEl.style.backgroundColor = 'var(--main-bg)';
       questionElement.innerHTML = "";
     }, 1000)
+    setTimeout(()=>{
+       window.alert('Refresh browser to try again')
+    },2000)
   }
+  
 }
 function displayQuestion(e) {
   const question = questions[e]
@@ -122,3 +128,4 @@ function displayQuestion(e) {
   formElement.answer = question['answer'];
   questionElement.appendChild(formElement);
 }
+

@@ -51,11 +51,36 @@ header, #top-menu
   margin:20px;
   padding:20px;
 
-  background-color: brown;
+  background-color: rgb(14, 0, 0);
   border-radius: 8px;
   
   text-align: center;
 }
 .hide-button{
   display:none
+}
+#questions {
+  display:flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+#questions form{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width:800px;
+}
+#questions form h1{
+  grid-column: 1/-1;
+  text-align: center;
+}
+#Name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:1rem;
+  height: 100vh;
+  flex-direction: column;
+
 }
