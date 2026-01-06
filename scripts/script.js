@@ -33,6 +33,23 @@ menuLinks.forEach(link => {
 
 const questionElement = document.getElementById('questions');
 console.log(questionElement)
+function answerValidator(e) {
+    const parent = e.target.parentElement;
+    const value = parent.querySelector('input').value;
+
+    const ans = parent.answer
+    if (e.target.value === ans) {
+      parent.style.backgroundColor = 'var(--correct-bg)';
+      mainEl.innerHTML = `Correct! ${ans}`;
+      mainEl.style.backgroundColor = 'var(--correct-bg)';
+    } else {
+      parent.style.backgroundColor = 'var(--wrong-bg)';
+      mainEl.innerHTML = 'Wrong';
+      mainEl.style.backgroundColor = 'var(--wrong-bg)';
+      // window.alert('incorrect try again')
+    }
+  };
+
 for (const question of questions) {
 
 
@@ -46,7 +63,7 @@ for (const question of questions) {
     console.log(choice)
     // Create a radio button
     const radio = document.createElement('input');
-    
+
     radio.type = 'radio';
     radio.name = 'options'; // Same name groups radio buttons together
     radio.value = choice;
@@ -58,8 +75,8 @@ for (const question of questions) {
     label.textContent = choice;
     label.classList.add('optionCard')
     radio.classList.add('hide-button')
-    
 
+    radio.addEventListener('change', answerValidator);
     // Append to the page
     formElement.appendChild(radio);
     formElement.appendChild(label);
@@ -68,25 +85,25 @@ for (const question of questions) {
   formElement.answer = question['answer'];
   questionElement.appendChild(formElement);
 
-  const radios = document.querySelectorAll('input[type="radio"][name="options"]');
-  radios.forEach(radio => {
-    radio.addEventListener('change', (e) => {
-      const parent = radio.parentElement;
-      const value = parent.querySelector('input').value;
+  // const radios = document.querySelectorAll('input[type="radio"][name="options"]');
+  // radios.forEach(radio => {
+    // radio.addEventListener('change', (e) => {
+    //   const parent = radio.parentElement;
+    //   const value = parent.querySelector('input').value;
 
-      console.log('clicked value:', value);
+    //   console.log('clicked value:', value);
 
 
-      if (e.target.value === question['answer']) {
-        parent.style.backgroundColor = 'var(--correct-bg)';
-        mainEl.innerHTML = `Correct! ${question['answer']}`;
-        mainEl.style.backgroundColor = 'var(--correct-bg)';
-      } else {
-        parent.style.backgroundColor = 'var(--wrong-bg)';
-        mainEl.innerHTML = 'Wrong';
-        mainEl.style.backgroundColor = 'var(--wrong-bg)';
-        // window.alert('incorrect try again')
-      }
-    });
-  });
+    //   if (e.target.value === question['answer']) {
+    //     parent.style.backgroundColor = 'var(--correct-bg)';
+    //     mainEl.innerHTML = `Correct! ${question['answer']}`;
+    //     mainEl.style.backgroundColor = 'var(--correct-bg)';
+    //   } else {
+    //     parent.style.backgroundColor = 'var(--wrong-bg)';
+    //     mainEl.innerHTML = 'Wrong';
+    //     mainEl.style.backgroundColor = 'var(--wrong-bg)';
+    //     // window.alert('incorrect try again')
+    //   }
+    // });
+  // });
 }
