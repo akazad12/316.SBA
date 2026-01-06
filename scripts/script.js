@@ -33,14 +33,15 @@ menuLinks.forEach(link => {
 let name;
 
 
-document.getElementById("Name").addEventListener('submit',function(e){
+document.getElementById("Name").addEventListener('submit', function (e) {
   e.preventDefault();
   displayQuestion(current);
   let userName = e.target.name.value;
-  let name = document.createDocumentFragment();
+  name = document.createDocumentFragment();
   let h1 = document.createElement('h1');
   h1.textContent = userName;
   name.appendChild(h1);
+  e.target.style.display = 'none';
 })
 
 const questionElement = document.getElementById('questions');
@@ -81,7 +82,8 @@ function answerValidator(e) {
 
       body.textContent = `${score}/${qs} correct`;
       name.appendChild(body)
-      mainEl.innerHTML = name;
+      mainEl.innerHTML = "";
+      mainEl.appendChild(name)
       mainEl.style.backgroundColor = 'var(--main-bg)';
       questionElement.innerHTML = "";
     }, 1000)
