@@ -30,6 +30,18 @@ menuLinks.forEach(link => {
   a.textContent = link.text
   topMenuEl.appendChild(a)
 });
+let name;
+
+
+document.getElementById("Name").addEventListener('submit',function(e){
+  e.preventDefault();
+  displayQuestion(current);
+  let userName = e.target.name.value;
+  let name = document.createDocumentFragment();
+  let h1 = document.createElement('h1');
+  h1.textContent = userName;
+  name.appendChild(h1);
+})
 
 const questionElement = document.getElementById('questions');
 
@@ -65,7 +77,11 @@ function answerValidator(e) {
   } if (current == qs) {
     console.log('hello');
     setTimeout(() => {
-      mainEl.innerText = `${score}/${qs} correct`;
+      let body = document.createElement('h2')
+
+      body.textContent = `${score}/${qs} correct`;
+      name.appendChild(body)
+      mainEl.innerHTML = name;
       mainEl.style.backgroundColor = 'var(--main-bg)';
       questionElement.innerHTML = "";
     }, 1000)
@@ -104,25 +120,3 @@ function displayQuestion(e) {
   formElement.answer = question['answer'];
   questionElement.appendChild(formElement);
 }
-displayQuestion(current)
-// const radios = document.querySelectorAll('input[type="radio"][name="options"]');
-// radios.forEach(radio => {
-// radio.addEventListener('change', (e) => {
-//   const parent = radio.parentElement;
-//   const value = parent.querySelector('input').value;
-
-//   console.log('clicked value:', value);
-
-
-//   if (e.target.value === question['answer']) {
-//     parent.style.backgroundColor = 'var(--correct-bg)';
-//     mainEl.innerHTML = `Correct! ${question['answer']}`;
-//     mainEl.style.backgroundColor = 'var(--correct-bg)';
-//   } else {
-//     parent.style.backgroundColor = 'var(--wrong-bg)';
-//     mainEl.innerHTML = 'Wrong';
-//     mainEl.style.backgroundColor = 'var(--wrong-bg)';
-//     // window.alert('incorrect try again')
-//   }
-// });
-// });

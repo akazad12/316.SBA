@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./styles/style.css"/>
+    <link rel="stylesheet" href="./styles/style.css" />
     <script defer type="module" src="./scripts/script.js"></script>
-    <script defer type="module"  src="./scripts/quiz316.3.js"></script>
+    <script defer type="module" src="./scripts/quiz316.3.js"></script>
 
 </head>
+
 <body>
     <header>
-        <nav id = 'top-menu'></nav>
-        <!-- <div id = 'drop-guide'>
-            <button class="dropbtn" id="dropdown-btn">
-                more
-            </button>
-        </div> -->
-         <div id = 'questions'></div></div>
+        <nav id='top-menu'></nav>
+        <form id='Name'>
+            <label for='name'>Enter Name</label>
+            <input type='text' id='name' name='name' required
+            oninvalid="setCustomValidity('Type your name to begin')"
+            oninput="setCustomValidity('')"/>
+            <button type = 'submit'>Continue</button>
+        </form>
+        <div id='questions'></div>
+        </div>
     </header>
-    <main class= 'main'>
-        
+    <main class='main'>
+
 
     </main>
-    
-    
+
+
 </body>
+
 </html>
