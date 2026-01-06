@@ -24,7 +24,7 @@ topMenuEl.classList.add('flex-around')
 menuLinks.forEach(link => {
   const a = document.createElement('a')
   a.href = link.href
-  a.onclick =function(){
+  a.onclick = function () {
     window.confirm('Feature Coming soon')
   }
   a.textContent = link.text
@@ -33,50 +33,60 @@ menuLinks.forEach(link => {
 
 const questionElement = document.getElementById('questions');
 console.log(questionElement)
-questionElement.innerText = questions[0]['question']
-let choices = questions[0]['choices']
-const formElement = document.createElement('form');                     
-
-for (const choice of choices) {
-  console.log(choice)
-  // Create a radio button
-  const radio = document.createElement('input');
-  radio.type = 'radio';
-  radio.name = 'options'; // Same name groups radio buttons together
-  radio.value = choice;
-  radio.id = choice ;
-
-  // Create a label for the radio button
-  const label = document.createElement('label');
-  label.htmlFor = choice;
-  label.textContent = choice;
-
-  // Append to the page
-  formElement.appendChild(radio);
-  formElement.appendChild(label);
-  
-}
-formElement.answer = questions[0]['answer'];
-questionElement.appendChild(formElement);
-
-const radios = document.querySelectorAll('input[type="radio"][name="options"]');
-radios.forEach(radio => {
-  radio.addEventListener('change', (e) => {
-    const parent = radio.parentElement;          
-    const value = parent.querySelector('input').value; 
-
-    console.log('clicked value:', value);
+for (const question of questions) {
 
 
-    if (e.target.value === questions[0]['answer']) {
-      parent.style.backgroundColor = 'var(--correct-bg)';
-      mainEl.innerHTML = `Correct! ${questions[0]['answer']}`;
-      mainEl.style.backgroundColor = 'var(--correct-bg)';
-    } else {
-      parent.style.backgroundColor = 'var(--wrong-bg)';
-      mainEl.innerHTML = 'Wrong';
-      mainEl.style.backgroundColor = 'var(--wrong-bg)';
-      window.alert('incorrect try again')
-    }
+  // questionElement.innerText = question['question']
+  const choices = question['choices']
+  const formElement = document.createElement('form');
+  const text = document.createElement('h1')
+  text.innerText = question['question']
+  formElement.appendChild(text)
+  for (const choice of choices) {
+    console.log(choice)
+    // Create a radio button
+    const radio = document.createElement('input');
+    
+    radio.type = 'radio';
+    radio.name = 'options'; // Same name groups radio buttons together
+    radio.value = choice;
+    radio.id = choice;
+
+    // Create a label for the radio button
+    const label = document.createElement('label');
+    label.htmlFor = choice;
+    label.textContent = choice;
+    label.classList.add('optionCard')
+    radio.classList.add('hide-button')
+    
+
+    // Append to the page
+    formElement.appendChild(radio);
+    formElement.appendChild(label);
+
+  }
+  formElement.answer = question['answer'];
+  questionElement.appendChild(formElement);
+
+  const radios = document.querySelectorAll('input[type="radio"][name="options"]');
+  radios.forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      const parent = radio.parentElement;
+      const value = parent.querySelector('input').value;
+
+      console.log('clicked value:', value);
+
+
+      if (e.target.value === question['answer']) {
+        parent.style.backgroundColor = 'var(--correct-bg)';
+        mainEl.innerHTML = `Correct! ${question['answer']}`;
+        mainEl.style.backgroundColor = 'var(--correct-bg)';
+      } else {
+        parent.style.backgroundColor = 'var(--wrong-bg)';
+        mainEl.innerHTML = 'Wrong';
+        mainEl.style.backgroundColor = 'var(--wrong-bg)';
+        // window.alert('incorrect try again')
+      }
+    });
   });
-});
+}
