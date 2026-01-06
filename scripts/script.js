@@ -53,7 +53,9 @@ function answerValidator(e) {
   }
   current+=1
   if (current<qs){
+    questionElement.innerHTML = ""
     displayQuestion(current)
+    
   }
 };
 function displayQuestion(e) {
@@ -63,16 +65,6 @@ function displayQuestion(e) {
   const text = document.createElement('h1')
   text.innerText = question['question']
   formElement.appendChild(text)
-
-  // for (const question of questions) {
-
-
-  // questionElement.innerText = question['question']
-  // const choices = question['choices']
-  // const formElement = document.createElement('form');
-  // const text = document.createElement('h1')
-  // text.innerText = question['question']
-  // formElement.appendChild(text)
 
   for (const choice of choices) {
     console.log(choice)
