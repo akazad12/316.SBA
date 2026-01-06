@@ -1,5 +1,5 @@
 import { questions } from "./quiz316.3.js";
-console.log(questions)
+
 var menuLinks = [
   {
     text: 'Create New Study Guide', href: '/#',
@@ -32,42 +32,54 @@ menuLinks.forEach(link => {
 });
 
 const questionElement = document.getElementById('questions');
-console.log(questionElement)
 
 let qs = questions.length;
 let current = 0;
+let score = 0
 function answerValidator(e) {
   const parent = e.target.parentElement;
   const value = parent.querySelector('input').value;
+  current += 1
+  if (current <= qs) {
+    const ans = parent.answer
+    if (e.target.value === ans) {
+      parent.style.backgroundColor = 'var(--correct-bg)';
+      mainEl.innerHTML = `Correct! ${ans}`;
+      score += 1;
+      mainEl.style.backgroundColor = 'var(--correct-bg)';
+    } else {
+      parent.style.backgroundColor = 'var(--wrong-bg)';
+      mainEl.innerHTML = 'Wrong';
+      mainEl.style.backgroundColor = 'var(--wrong-bg)';
+      // window.alert('incorrect try again')
+    }
+    setTimeout(() => { //Resource used from w3 schools
+      if (current < qs) {
+        questionElement.innerHTML = ""
+        displayQuestion(current)
+        mainEl.style.backgroundColor = 'var(--main-bg)';
+      }
+    }, 500)
+    console.log(score, qs, current)
 
-  const ans = parent.answer
-  if (e.target.value === ans) {
-    parent.style.backgroundColor = 'var(--correct-bg)';
-    mainEl.innerHTML = `Correct! ${ans}`;
-    mainEl.style.backgroundColor = 'var(--correct-bg)';
-  } else {
-    parent.style.backgroundColor = 'var(--wrong-bg)';
-    mainEl.innerHTML = 'Wrong';
-    mainEl.style.backgroundColor = 'var(--wrong-bg)';
-    // window.alert('incorrect try again')
+  } if (current == qs) {
+    console.log('hello');
+    setTimeout(() => {
+      mainEl.innerText = `${score}/${qs} correct`;
+      mainEl.style.backgroundColor = 'var(--main-bg)';
+      questionElement.innerHTML = "";
+    }, 1000)
   }
-  current+=1
-  if (current<qs){
-    questionElement.innerHTML = ""
-    displayQuestion(current)
-    
-  }
-};
+}
 function displayQuestion(e) {
   const question = questions[e]
   const choices = question['choices']
   const formElement = document.createElement('form');
-  const text = document.createElement('h1')
-  text.innerText = question['question']
+  const text = document.createElement('h1');
+  text.innerText = `${current + 1}. ${question['question']}`;
   formElement.appendChild(text)
 
   for (const choice of choices) {
-    console.log(choice)
     // Create a radio button
     const radio = document.createElement('input');
 
@@ -85,7 +97,6 @@ function displayQuestion(e) {
 
     radio.addEventListener('click', answerValidator);
     // Append to the page
-    console.log(radio)
     formElement.appendChild(radio);
     formElement.appendChild(label);
 
