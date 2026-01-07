@@ -33,9 +33,11 @@ menuLinks.forEach(link => {
   a.textContent = link.text
   topMenuEl.appendChild(a)
 });
+//Declare the name document fragment for later use
 let name;
 document.getElementById("Name").addEventListener('submit', function (e) {
   e.preventDefault();
+  //show the display for the first question only when validated
   displayQuestion(current);
   let userName = e.target.name.value;
   name = document.createDocumentFragment();
@@ -50,10 +52,12 @@ const questionElement = document.getElementById('questions');
 let qs = questions.length;
 let current = 0;
 let score = 0
+//Checks whether an option choice is correct, displays the next question
 function answerValidator(e) {
   const parent = e.target.parentElement;
   const value = parent.querySelector('input').value;
   current += 1
+//
   if (current <= qs) {
     const ans = parent.answer
     if (e.target.value === ans) {
@@ -61,23 +65,23 @@ function answerValidator(e) {
       mainEl.innerHTML = `Correct! ${ans}`;
       score += 1;
       mainEl.style.backgroundColor = 'var(--correct-bg)';
-    } else {
+    } else { //Update the background and text for when a choice is wrong
       parent.style.backgroundColor = 'var(--wrong-bg)';
       mainEl.innerHTML = 'Wrong';
       mainEl.style.backgroundColor = 'var(--wrong-bg)';
       // window.alert('incorrect try again')
     }
-    setTimeout(() => { //Resource used from w3 schools
+    setTimeout(() => { //Resource used from w3 schools for waiting to view the result before changing to the next question
       if (current < qs) {
         questionElement.innerHTML = ""
         displayQuestion(current)
-        mainEl.innerHTML= ""
+        mainEl.innerHTML = ""
         mainEl.style.backgroundColor = 'var(--main-bg)';
       }
     }, 1000)
     console.log(score, qs, current)
 
-  } if (current == qs) {
+  } if (current == qs) {//Display the final score using the document fragment for the user input and the cached score
     console.log('hello');
     setTimeout(() => {
       let body = document.createElement('h2')
@@ -89,13 +93,13 @@ function answerValidator(e) {
       mainEl.style.backgroundColor = 'var(--main-bg)';
       questionElement.innerHTML = "";
     }, 1000)
-    setTimeout(()=>{
-       window.alert('Refresh browser to try again')
-    },2000)
+    setTimeout(() => {
+      window.alert('Refresh browser to try again')
+    }, 2000)
   }
-  
+
 }
-function displayQuestion(e) {
+function displayQuestion(e) { //Creates the form element that will hold the question buttons and the question text
   const question = questions[e]
   const choices = question['choices']
   const formElement = document.createElement('form');
