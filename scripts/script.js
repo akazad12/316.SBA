@@ -35,6 +35,7 @@ menuLinks.forEach(link => {
 });
 //Declare the name document fragment for later use
 let name;
+//Dcocument fragment created to start the program when the user clicks submit
 document.getElementById("Name").addEventListener('submit', function (e) {
   e.preventDefault();
   //show the display for the first question only when validated
@@ -79,10 +80,8 @@ function answerValidator(e) {
         mainEl.style.backgroundColor = 'var(--main-bg)';
       }
     }, 1000)
-    console.log(score, qs, current)
 
   } if (current == qs) {//Display the final score using the document fragment for the user input and the cached score
-    console.log('hello');
     setTimeout(() => {
       let body = document.createElement('h2')
 
